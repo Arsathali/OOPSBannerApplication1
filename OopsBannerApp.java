@@ -1,31 +1,33 @@
 /**
- * OOPSBannerApp UC4 – OOPS Banner Application (Use Case 4)
+ * OOPSBannerApp UC5 – OOPS Banner Application (Use Case 5)
  *
- * This class extends UC3 by using a String array and loop to print the "OOPS" banner.
- * It improves code modularity, reusability, and maintainability by avoiding multiple
- * individual print statements.
+ * This class extends UC4 by using inline array initialization with String.join()
+ * to print the "OOPS" banner in a more concise and readable way.
+ * It eliminates the need for separate statements to populate the array.
  *
  * @author Developer
- * @version 4.0
+ * @version 5.0
  */
 
 public class OopsBannerApp {
 
     public static void main(String[] args) {
-        // Create an array to store all lines of the "OOPS" banner
-        String[] banner = new String[7];
 
-        banner[0] = String.join("", "  *****    *****   *****   *****");
-        banner[1] = String.join("", " *     *  *     *  *     * *     ");
-        banner[2] = String.join("", " *     *  *     *  *     * *     ");
-        banner[3] = String.join("", " *     *  *     *  *****   ***** ");
-        banner[4] = String.join("", " *     *  *     *  *           * ");
-        banner[5] = String.join("", " *     *  *     *  *           * ");
-        banner[6] = String.join("", "  *****    *****   *       ***** ");
+        // Inline array initialization with String.join() for each banner line
+        String[] banner = {
+            String.join("", "  *****    *****   *****   *****"),
+            String.join("", " *     *  *     *  *     * *     "),
+            String.join("", " *     *  *     *  *     * *     "),
+            String.join("", " *     *  *     *  *****   ***** "),
+            String.join("", " *     *  *     *  *           * "),
+            String.join("", " *     *  *     *  *           * "),
+            String.join("", "  *****    *****   *       ***** ")
+        };
 
-        // Use a for-each loop to print each line
+        // Use enhanced for loop to print each line
         for (String line : banner) {
             System.out.println(line);
         }
+
     }
 }
