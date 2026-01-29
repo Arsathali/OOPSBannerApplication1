@@ -1,55 +1,25 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * OOPSBannerApp UC7 – OOPS Banner Application (Use Case 7)
+ * OOPSBannerApp UC8 – OOPS Banner Application (Use Case 8)
  *
- * This class refactors UC6 by introducing a CharacterPattern inner static class
- * that encapsulates each character and its banner pattern.
- * This approach improves modularity, reusability, and scalability for managing multiple characters.
+ * This class extends UC7 by using a Map to store character patterns.
+ * This allows dynamic lookup and rendering of any word, improving scalability.
+ * Output remains visually identical to previous UCs.
  *
- * @author Developer
- * @version 7.0
+ * Author: Developer
+ * Version: 8.0
  */
+
 public class OopsBannerApp {
 
-    // Inner static class to store character and its 7-line banner pattern
-    static class CharacterPattern {
-        private final char character;
-        private final String[] pattern;
+    // Map to store character patterns
+    private static final Map<Character, String[]> characterPatterns = new HashMap<>();
 
-        /**
-         * Constructor to initialize the character and its banner pattern
-         *
-         * @param character the character represented
-         * @param pattern the 7-line banner pattern of the character
-         */
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
-
-        /**
-         * Getter for the pattern
-         *
-         * @return String array of the character's banner pattern
-         */
-        public String[] getPattern() {
-            return pattern;
-        }
-
-        /**
-         * Getter for the character
-         *
-         * @return the character
-         */
-        public char getCharacter() {
-            return character;
-        }
-    }
-
-    /**
-     * Utility method to create CharacterPattern for O
-     */
-    private static CharacterPattern createO() {
-        return new CharacterPattern('O', new String[] {
+    // Static block to initialize patterns
+    static {
+        characterPatterns.put('O', new String[] {
             "  ***** ",
             " *     *",
             " *     *",
@@ -58,13 +28,7 @@ public class OopsBannerApp {
             " *     *",
             "  ***** "
         });
-    }
-
-    /**
-     * Utility method to create CharacterPattern for P
-     */
-    private static CharacterPattern createP() {
-        return new CharacterPattern('P', new String[] {
+        characterPatterns.put('P', new String[] {
             " ***** ",
             " *    *",
             " *    *",
@@ -73,13 +37,7 @@ public class OopsBannerApp {
             " *     ",
             " *     "
         });
-    }
-
-    /**
-     * Utility method to create CharacterPattern for S
-     */
-    private static CharacterPattern createS() {
-        return new CharacterPattern('S', new String[] {
+        characterPatterns.put('S', new String[] {
             "  *****",
             " *     ",
             " *     ",
@@ -90,22 +48,26 @@ public class OopsBannerApp {
         });
     }
 
+    /**
+     * Render a word using the character patterns stored in the Map.
+     * @param word the word to render in banner style
+     */
+    public static void renderBanner(String word) {
+        int rows = 7; 
+        for (int i = 0; i < rows; i++) {
+            StringBuilder lineBuilder = new StringBuilder();
+            for (char c : word.toCharArray()) {
+                String[] pattern = characterPatterns.get(c);
+                if (pattern != null) {
+                    lineBuilder.append(pattern[i]).append("  "); 
+                }
+            }
+            System.out.println(lineBuilder);
+        }
+    }
+
     public static void main(String[] args) {
-        // Create CharacterPattern objects
-        CharacterPattern O = createO();
-        CharacterPattern P = createP();
-        CharacterPattern S = createS();
-
-        // Assemble the banner using the character objects
-        String[] banner = new String[7];
-        for (int i = 0; i < 7; i++) {
-            banner[i] = O.getPattern()[i] + "  " + O.getPattern()[i] + "  " +
-                        P.getPattern()[i] + "  " + S.getPattern()[i];
-        }
-
-        // Print the banner
-        for (String line : banner) {
-            System.out.println(line);
-        }
+        String message = "OOPS"; // Word render
+        renderBanner(message);
     }
 }
